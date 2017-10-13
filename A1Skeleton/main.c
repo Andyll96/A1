@@ -59,6 +59,7 @@ void display(void);
 void reshape(int w, int h);
 void keyboard(unsigned char key, int x, int y);
 void functionKeys(int key, int x, int y);
+void drawDirigible(void);
 
 
 int main(int argc, char **argv)
@@ -150,16 +151,27 @@ void display(void)
     glMaterialfv(GL_FRONT, GL_DIFFUSE, submarine_mat_diffuse);
     glMaterialfv(GL_FRONT, GL_SHININESS, submarine_mat_shininess);
 
-    // Apply transformations to move submarine
-    // ...
 
-    // Apply transformations to construct submarine, modify this!
-    // Draw Submarine
+
 	glPushMatrix();
-		//Main Body
+		glPushMatrix();
+			glScalef(0.5, 50.0, 0.5);
+			glutSolidCube(0.5);
+		glPopMatrix(); 
 		glTranslatef(0, 0 + dy, 0);
 		glRotatef(angle, 0.0f, 1.0f, 0.0f);
+		drawDirigible();
+	glPopMatrix();
+    // Draw ground/sea floor
+    DrawMeshQM(&groundMesh, meshSize);
 
+    glutSwapBuffers();   // Double buffering, swap buffers
+}
+
+void drawDirigible(void) {
+	glPushMatrix();
+	//Main Body
+	glTranslated(0 + dx, 0, 0 + dz);
 		glPushMatrix(); //Main Body
 			glTranslatef(0.0, 8.0, 0.0);
 			glScalef(6.0, 1.0, 1.0);
@@ -188,17 +200,11 @@ void display(void)
 
 		//Passenger Deck
 		glPushMatrix();
-			glTranslatef(0.0, 7.0, 0.0);
-			glScalef(4.0, 0.8, 0.8);
-			glutSolidCube(1.0);
+		glTranslatef(0.0, 7.0, 0.0);
+		glScalef(4.0, 0.8, 0.8);
+		glutSolidCube(1.0);
 		glPopMatrix();
 	glPopMatrix();
-
-    // Draw ground/sea floor
-    DrawMeshQM(&groundMesh, meshSize);
-
-
-    glutSwapBuffers();   // Double buffering, swap buffers
 }
 
 // Callback, called at initialization and whenever user resizes the window.

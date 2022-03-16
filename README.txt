@@ -1,4 +1,7 @@
 CPS511 Assignment 1 Skeleton Code
+Using Geometric Transformations to Construct and Manipulate Multi-Part Models
+
+Construct and interactively manipulate a complex multi-part model. 
 
 main.c: Contains the main() function, setups OpenGL and draws, does keyboard/mouse handling etc. This is where you 
 should add your submarine/dirigible drawing & animation code.
